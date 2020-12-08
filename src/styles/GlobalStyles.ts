@@ -7,11 +7,13 @@ export default createGlobalStyle`
   outline: 0;
 }
 body {
+  background-color:rgb(234, 237, 237);
   -webkit-font-smoothing: antialiased;
 }
 
 body, input, button {
-  font: 16px 'Amazon Ember', arial;
+  font-size: 16px;
+  font-family: --apple-system, BlinkMacSystemFont,"Suegoe UI",'Roboto', arial;
 }
 
 h1, h2, h3, h4, h5, h6, strong {
