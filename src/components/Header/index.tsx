@@ -1,5 +1,6 @@
 import { ShoppingBasket } from '@material-ui/icons';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   Container,
@@ -13,10 +14,12 @@ import {
 const Header: React.FC = () => {
   return (
     <Container>
-      <img
-        src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
-        alt="amazon-logo"
-      />
+      <Link to="/">
+        <img
+          src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
+          alt="amazon-logo"
+        />
+      </Link>
 
       <HeaderSearch>
         <input type="text" />
@@ -37,10 +40,12 @@ const Header: React.FC = () => {
           <strong>Prime</strong>
         </HeaderOption>
 
-        <HeaderOptionsBasket>
-          <ShoppingBasket />
-          <span>0</span>
-        </HeaderOptionsBasket>
+        <Link to="/checkout">
+          <HeaderOptionsBasket>
+            <ShoppingBasket />
+            <span>0</span>
+          </HeaderOptionsBasket>
+        </Link>
       </HeaderNav>
     </Container>
   );
