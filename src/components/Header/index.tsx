@@ -1,6 +1,7 @@
 import { ShoppingBasket } from '@material-ui/icons';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../../hooks/Cart';
 
 import {
   Container,
@@ -12,6 +13,7 @@ import {
 } from './styles';
 
 const Header: React.FC = () => {
+  const { products } = useCart();
   return (
     <Container>
       <Link to="/">
@@ -43,7 +45,7 @@ const Header: React.FC = () => {
         <Link to="/checkout">
           <HeaderOptionsBasket>
             <ShoppingBasket />
-            <span>0</span>
+            <span>{products.length || 0}</span>
           </HeaderOptionsBasket>
         </Link>
       </HeaderNav>

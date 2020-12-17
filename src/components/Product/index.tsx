@@ -1,15 +1,12 @@
 import React from 'react';
 
+import { IProduct, useCart } from '../../hooks/Cart';
+
 import { Container, ProductInfo } from './styles';
 
-interface ProductProps {
-  title: string;
-  image: string;
-  price: number;
-  rating: number;
-}
+const Product: React.FC<IProduct> = ({ id, image, price, rating, title }) => {
+  const { addProduct } = useCart();
 
-const Product: React.FC<ProductProps> = ({ image, price, rating, title }) => {
   return (
     <Container>
       <ProductInfo>
@@ -19,15 +16,28 @@ const Product: React.FC<ProductProps> = ({ image, price, rating, title }) => {
           <strong>{price}</strong>
         </p>
         <div>
-          {Array.from(Array(rating)).map(() => (
-            <p>⭐</p>
+          {Array.from(Array(rating)).map((_, index) => (
+            <p key={index}>⭐</p>
           ))}
         </div>
       </ProductInfo>
 
       <img src={image} alt={title} />
 
-      <button type="button">Add to basket</button>
+      <button
+        onClick={() =>
+          addProduct({
+            id,
+            image,
+            price,
+            rating,
+            title,
+          })
+        }
+        type="button"
+      >
+        Add to basket
+      </button>
     </Container>
   );
 };

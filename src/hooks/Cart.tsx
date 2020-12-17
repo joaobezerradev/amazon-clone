@@ -1,39 +1,50 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
 
-interface ProductProps {
-  id: string;
+export interface IProduct {
+  id: number;
   title: string;
   image: string;
   price: number;
   rating: number;
 }
+
 interface CartContextData {
-  products: ProductProps[];
-  addProduct(product: ProductProps): void;
-  removeProduct(product_id: string): void;
+  products: IProduct[];
+  addProduct(product: IProduct): void;
+  removeProduct(product_index: number): void;
 }
 
 const CartContext = createContext<CartContextData>({} as CartContextData);
 
 const CartProvider: React.FC = ({ children }) => {
-  const [data, setData] = useState<ProductProps[]>({} as ProductProps[]);
+  const [data, setData] = useState<IProduct[]>([] as IProduct[]);
 
   const addProduct = useCallback(
-    (product: ProductProps) => {
+    (product: IProduct) => {
       setData([...data, product]);
     },
     [data],
   );
 
   const removeProduct = useCallback(
-    (product_id: string) => {
-      setData(data.filter(product => product.id !== product_id));
+    (product_index: number) => {
+      const findIndex = data.map((_, index) => index === product_index);
+      if (!findIndex) return;
+      const allProducts = data.filter((_, index) => index !== product_index);
+
+      setData(allProducts);
     },
     [data],
   );
 
   return (
-    <CartContext.Provider value={{ products: data, addProduct, removeProduct }}>
+    <CartContext.Provider
+      value={{
+        products: data,
+        addProduct,
+        removeProduct,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
