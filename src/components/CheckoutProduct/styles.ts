@@ -31,5 +31,10 @@ export const ProductInfo = styled.div`
   }
 `;
 
-export const CheckoutPrice = styled.div``;
-export const ProductAmount = styled.div``;
+export const CheckoutPrice = styled.div`
+  display: flex;
+  align-items: center;
+  > small {
+    margin-right: 2px;
+  }
+`;
